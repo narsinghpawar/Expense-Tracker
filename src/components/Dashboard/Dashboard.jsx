@@ -226,13 +226,13 @@ function Dashboard() {
               View Transaction
             </button>
 
-            <button
+            {/* <button
               className="full-btn"
               onClick={() => navigate("billReminder")}
             >
               <FaCalendarAlt />
               Bills Reminder
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

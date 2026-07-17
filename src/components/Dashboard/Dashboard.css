@@ -293,7 +293,7 @@ body {
 
 .quick-grid {
     display: grid;
-    grid-template-columns: repeat(3, 2fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     margin-top: 20px;
 }
@@ -334,6 +334,18 @@ body {
 
 .full-btn {
     grid-column: span 2;
+}
+
+@media (max-width: 992px) {
+    .quick-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .quick-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ===========================
