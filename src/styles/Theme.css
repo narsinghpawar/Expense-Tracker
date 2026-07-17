@@ -1,0 +1,14 @@
+:root {
+
+    /* Background Colors */
+    --primary-bg: #FFF8E7;
+    --secondary-bg: #f3f4f6;
+    /* Text Colors */
+    --primary-text: #374151;
+    --secondary-text: #777777;
+    /* Brand Color */
+    --primary-color: #2563eb;
+    /* Border & Shadow */
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+}

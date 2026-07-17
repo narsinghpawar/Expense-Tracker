@@ -1,0 +1,367 @@
+/* ==========================
+   GLOBAL
+========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #f4f7fc;
+    color: #1e293b;
+}
+
+.reports-container {
+    padding: 30px;
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.reports-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.header-left h1 {
+    font-size: 34px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.header-left p {
+    margin-top: 8px;
+    color: #64748b;
+    font-size: 15px;
+}
+
+.download-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    background: #2563eb;
+    color: #fff;
+    padding: 14px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.download-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+/* ==========================
+   FILTER
+========================== */
+
+.filter-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 18px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+}
+
+.filter-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2563eb;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.form-group select,
+.form-group input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #dbe3ec;
+    border-radius: 10px;
+    padding: 0 14px;
+    font-size: 15px;
+    outline: none;
+    transition: .3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
+}
+
+.date-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #dbe3ec;
+    border-radius: 10px;
+    padding: 0 14px;
+    height: 48px;
+}
+
+.date-box svg {
+    color: #64748b;
+    margin-right: 10px;
+}
+
+.date-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    background: transparent;
+}
+
+.search-btn-area {
+    justify-content: flex-end;
+}
+
+.generate-btn {
+    margin-top: auto;
+    height: 48px;
+    border: none;
+    background: #10b981;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.generate-btn:hover {
+    background: #059669;
+}
+
+/* ==========================
+   SUMMARY CARDS
+========================== */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.summary-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+    transition: .35s;
+    animation: fadeUp .8s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, .12);
+}
+
+.card-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    color: #fff;
+}
+
+.income .card-icon {
+    background: #22c55e;
+}
+
+.expense .card-icon {
+    background: #ef4444;
+}
+
+.savings .card-icon {
+    background: #2563eb;
+}
+
+.transaction .card-icon {
+    background: #f59e0b;
+}
+
+.card-content h5 {
+    color: #64748b;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.card-content h2 {
+    font-size: 28px;
+    margin-bottom: 6px;
+    color: #0f172a;
+}
+
+.card-content span {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+/* ==========================
+   CHARTS
+========================== */
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.chart-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chart-header h3 {
+    font-size: 20px;
+    color: #1e293b;
+}
+
+.chart-placeholder {
+    height: 320px;
+    border: 2px dashed #d4dbe6;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #94a3b8;
+    font-size: 18px;
+}
+
+.full-chart {
+    margin-bottom: 20px;
+}
+
+/* ==========================
+   ANIMATION
+========================== */
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:991px) {
+
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width:768px) {
+
+    .reports-container {
+        padding: 20px;
+    }
+
+    .reports-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-left h1 {
+        font-size: 28px;
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .download-btn,
+    .generate-btn {
+        width: 100%;
+    }
+
+}
+
+@media(max-width:480px) {
+
+    .header-left h1 {
+        font-size: 24px;
+    }
+
+    .chart-placeholder {
+        height: 220px;
+    }
+
+    .card-content h2 {
+        font-size: 24px;
+    }
+
+}
+
+.chart-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .08);
+    min-height: 400px;
+}
+
+.full-chart {
+    margin-top: 25px;
+}

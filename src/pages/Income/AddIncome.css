@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, sans-serif;
+}
+
+body {
+    background: #f5f7fb;
+}
+
+.income-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+.income-card {
+    width: 100%;
+    max-width: 1050px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 35px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+}
+
+.income-header {
+    margin-bottom: 30px;
+}
+
+.income-header h2 {
+    font-size: 30px;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.income-header p {
+    color: #64748b;
+}
+
+.income-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 14px;
+    border: 1px solid #d7dee7;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    transition: .3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .15);
+}
+
+textarea {
+    resize: none;
+}
+
+.full-width {
+    margin-top: 20px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.save-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.save-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.reset-btn {
+    background: #e2e8f0;
+    color: #334155;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.reset-btn:hover {
+    background: #cbd5e1;
+}
+
+@media(max-width:768px) {
+
+    .income-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .save-btn,
+    .reset-btn {
+        width: 100%;
+    }
+
+    .income-card {
+        padding: 20px;
+    }
+
+}
