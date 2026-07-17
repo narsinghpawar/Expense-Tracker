@@ -7,12 +7,15 @@ const expenseValidation = {
 
   amount: {
     required: true,
-    min: 1,
-    max: 500000,
     type: "number",
+    min: 1,
   },
 
   category: {
+    required: true,
+  },
+
+  expenseDate: {
     required: true,
   },
 
@@ -20,12 +23,21 @@ const expenseValidation = {
     required: true,
   },
 
-  date: {
-    required: true,
+  description: {
+    required: false,
+    maxLength: 250,
   },
 
-  description: {
-    maxLength: 200,
+  receipt: {
+    required: false,
+  },
+
+  status: {
+    required: false,
+  },
+
+  recurring: {
+    required: false,
   },
 };
 
