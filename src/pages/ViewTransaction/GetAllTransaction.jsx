@@ -83,19 +83,6 @@ function GetAllTransaction() {
           <FaSearch />
           <input type="text" placeholder="Search Transaction..." />
         </div>
-
-        <select>
-          <option>All Type</option>
-          <option>Income</option>
-          <option>Expense</option>
-        </select>
-
-        <select>
-          <option>All Category</option>
-          <option>Food</option>
-          <option>Rent</option>
-          <option>Shopping</option>
-        </select>
       </div>
 
       {/* Table */}

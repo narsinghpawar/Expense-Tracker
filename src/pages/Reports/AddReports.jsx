@@ -125,11 +125,6 @@ function Reports() {
           <h4>Total Savings</h4>
           <h2>₹28,000</h2>
         </div>
-
-        <div className="summary-card transaction">
-          <h4>Transactions</h4>
-          <h2>108</h2>
-        </div>
       </div>
 
       {/* Charts */}

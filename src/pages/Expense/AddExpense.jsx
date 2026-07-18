@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Expense.css";
-
 import { addExpense } from "../../features/expense/expenseThunk";
 import expenseValidation from "../../validation/expenseValidationRule";
 import { validateField, validateForm } from "../../utils/validator";
@@ -20,6 +19,7 @@ const initialState = {
 
 function AddExpense() {
   const dispatch = useDispatch();
+  //the key what we add in expenseSlice file same key we need add at state.expense
   const { loading, error } = useSelector((state) => state.expense);
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
@@ -40,9 +40,7 @@ function AddExpense() {
 
   const handleBlur = (e) => {
     const { name, value } = e.target;
-
     const error = validateField(name, value, expenseValidation);
-
     setErrors((prev) => ({
       ...prev,
       [name]: error,
@@ -56,7 +54,6 @@ function AddExpense() {
       setErrors(validationErrors);
       return;
     }
-
     try {
       await dispatch(addExpense(formData)).unwrap();
       alert("Expense Added Successfully");
