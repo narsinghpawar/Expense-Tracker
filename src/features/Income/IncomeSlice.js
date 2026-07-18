@@ -14,7 +14,6 @@ const IncomeSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-
       .addCase(addIncome.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -22,7 +21,9 @@ const IncomeSlice = createSlice({
 
       .addCase(addIncome.fulfilled, (state, action) => {
         state.loading = false;
-        state.addIncome.push(action.payload);
+
+        // If your thunk returns response.data
+        state.income.push(action.payload.data);
       })
 
       .addCase(addIncome.rejected, (state, action) => {

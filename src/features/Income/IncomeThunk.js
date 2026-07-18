@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { addIncomeService } from "./IncomeService";
 
 export const addIncome = createAsyncThunk(
-  "income/addIncome",
+  "income/add",
   async (incomeData, thunkAPI) => {
     try {
       return await addIncomeService(incomeData);

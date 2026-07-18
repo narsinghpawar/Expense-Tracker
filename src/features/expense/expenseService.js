@@ -3,8 +3,7 @@ import axios from "axios";
 const api = axios.create({
   baseURL: "http://localhost:5000/api",
 });
-
-export default api;
+//http://localhost:5000/api/expense/add
 
 // Add Expense
 export const addExpenseService = async (expenseData) => {
