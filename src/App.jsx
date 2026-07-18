@@ -17,7 +17,6 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Headers />
-
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/expense/add" element={<AddExpense />} />

@@ -1,25 +1,39 @@
-import {
-  FaSearch,
-  FaPlus,
-  FaEdit,
-  FaTrash,
-  FaWallet,
-  FaArrowDown,
-  FaExchangeAlt,
-} from "react-icons/fa";
+import { FaSearch, FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 import "./GetAllTransaction.css";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getAllTransactions } from "../../features/transaction/transactionThunk";
+import { setSelectedTransaction } from "../../features/transaction/transactionSlice";
+import { setSelectedExpense } from "../../features/expense/expenseSlice";
 
 function GetAllTransaction() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(getAllTransactions());
   }, [dispatch]);
-  // const { transactions, loading, error } = useSelector(
-  //   (state) => state.transaction,
-  // );
+
+  const handleEdit = (item) => {
+    dispatch(
+      setSelectedExpense({
+        id: item.id,
+        title: item.title,
+        amount: item.amount,
+        category: item.category,
+        expenseDate: item.date,
+        paymentMethod: item.payment,
+        status: item.status,
+        recurring: item.recurring || "One Time",
+        description: item.description || "",
+        receipt: null,
+      }),
+    );
+
+    navigate("/expense/add");
+  };
+
   const transactions = [
     {
       id: 1,
@@ -28,7 +42,7 @@ function GetAllTransaction() {
       category: "Salary",
       type: "Income",
       payment: "Bank",
-      amount: "₹75,000",
+      amount: "75000",
       status: "Completed",
     },
     {
@@ -38,7 +52,7 @@ function GetAllTransaction() {
       category: "Food",
       type: "Expense",
       payment: "UPI",
-      amount: "₹2,500",
+      amount: "2500",
       status: "Completed",
     },
     {
@@ -48,46 +62,27 @@ function GetAllTransaction() {
       category: "Rent",
       type: "Expense",
       payment: "Bank",
-      amount: "₹15,000",
+      amount: "15000",
       status: "Pending",
-    },
-    {
-      id: 4,
-      date: "13-Jul-2026",
-      title: "Freelancing",
-      category: "Business",
-      type: "Income",
-      payment: "Bank",
-      amount: "₹20,000",
-      status: "Completed",
-    },
-    {
-      id: 5,
-      date: "12-Jul-2026",
-      title: "Shopping",
-      category: "Shopping",
-      type: "Expense",
-      payment: "Card",
-      amount: "₹6,200",
-      status: "Completed",
     },
   ];
 
   return (
     <div className="transaction-container">
-      {/* Header */}
       <div className="transaction-header">
         <div>
           <h2>View All Transactions</h2>
           <p>Manage all your income and expense records</p>
         </div>
 
-        <button className="add-btn">
+        <button
+          className="add-btn"
+          onClick={() => navigate("/transaction/add")}
+        >
           <FaPlus /> Add Transaction
         </button>
       </div>
 
-      {/* Search & Filter */}
       <div className="toolbar">
         <div className="search-box">
           <FaSearch />
@@ -95,7 +90,6 @@ function GetAllTransaction() {
         </div>
       </div>
 
-      {/* Table */}
       <div className="table-wrapper">
         <table>
           <thead>
@@ -129,8 +123,11 @@ function GetAllTransaction() {
                     {item.type}
                   </span>
                 </td>
+
                 <td>{item.payment}</td>
-                <td>{item.amount}</td>
+
+                <td>₹{item.amount}</td>
+
                 <td>
                   <span
                     className={
@@ -144,7 +141,7 @@ function GetAllTransaction() {
                 </td>
 
                 <td>
-                  <button className="edit-btn">
+                  <button className="edit-btn" onClick={() => handleEdit(item)}>
                     <FaEdit />
                   </button>
 
@@ -156,19 +153,6 @@ function GetAllTransaction() {
             ))}
           </tbody>
         </table>
-      </div>
-
-      {/* Pagination */}
-      <div className="pagination">
-        <button>Previous</button>
-
-        <div className="pages">
-          <span className="active">1</span>
-          <span>2</span>
-          <span>3</span>
-        </div>
-
-        <button>Next</button>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { getAllTransactions } from "./transactionThunk";
 
 const initialState = {
   transactions: [],
+  selectedTransaction: null,
   loading: false,
   error: null,
 };
@@ -10,12 +11,23 @@ const initialState = {
 const transactionSlice = createSlice({
   name: "transaction",
   initialState,
-  reducers: {},
+
+  reducers: {
+    setSelectedTransaction: (state, action) => {
+      state.selectedTransaction = action.payload;
+    },
+
+    clearSelectedTransaction: (state) => {
+      state.selectedTransaction = null;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
+
       .addCase(getAllTransactions.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
 
       .addCase(getAllTransactions.fulfilled, (state, action) => {
@@ -29,5 +41,8 @@ const transactionSlice = createSlice({
       });
   },
 });
+
+export const { setSelectedTransaction, clearSelectedTransaction } =
+  transactionSlice.actions;
 
 export default transactionSlice.reducer;

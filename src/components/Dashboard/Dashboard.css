@@ -1,11 +1,4 @@
-/* ===========================
-   Google Font
-=========================== */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-
-/* ===========================
-   Global
-=========================== */
 
 * {
     margin: 0;
@@ -21,17 +14,17 @@ body {
 
 .dashboard {
     padding: 30px;
-    background: #f5f7fb;
     min-height: 100vh;
+    background: #f5f7fb;
 }
 
-/* ===========================
-      Top Cards
-=========================== */
+/* ==========================
+   TOP CARDS
+========================== */
 
 .top-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 24px;
     margin-bottom: 30px;
 }
@@ -44,14 +37,14 @@ body {
     align-items: center;
     gap: 18px;
     position: relative;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
-    transition: .35s;
     border: 1px solid #edf2f7;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    transition: all 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(15, 23, 42, .12);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
 }
 
 .card-icon {
@@ -59,10 +52,10 @@ body {
     height: 62px;
     border-radius: 16px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 24px;
+    justify-content: center;
     color: #fff;
+    font-size: 24px;
 }
 
 .income-icon {
@@ -71,10 +64,6 @@ body {
 
 .expense-icon {
     background: linear-gradient(135deg, #ef4444, #f87171);
-}
-
-.saving-icon {
-    background: linear-gradient(135deg, #3b82f6, #60a5fa);
 }
 
 .balance-icon {
@@ -86,29 +75,27 @@ body {
 }
 
 .card-content p {
-    font-size: 14px;
     color: #64748b;
-    margin-bottom: 8px;
+    font-size: 14px;
 }
 
 .card-content h2 {
-    font-size: 30px;
-    margin-bottom: 8px;
+    margin: 8px 0;
+    font-size: 28px;
     color: #111827;
 }
 
 .card-content span {
     font-size: 13px;
-    color: #64748b;
 }
 
 .green {
-    color: #16a34a !important;
+    color: #16a34a;
     font-weight: 600;
 }
 
 .red {
-    color: #ef4444 !important;
+    color: #ef4444;
     font-weight: 600;
 }
 
@@ -116,46 +103,36 @@ body {
     position: absolute;
     top: 18px;
     right: 18px;
-    color: #94a3b8;
     cursor: pointer;
-    font-size: 18px;
+    color: #94a3b8;
 }
 
-/* ===========================
-      Bottom Grid
-=========================== */
+/* ==========================
+   BOTTOM GRID
+========================== */
 
 .bottom-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1.2fr .8fr;
-    gap: 25px;
+    grid-template-columns: 1.2fr 1.2fr 0.9fr;
+    gap: 24px;
 }
-
-@media(max-width:1100px) {
-
-    .bottom-grid {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-/* ===========================
-        Panel
-=========================== */
 
 .panel {
-    background: white;
+    background: #fff;
     border-radius: 18px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, .06);
+    padding: 24px;
     border: 1px solid #edf2f7;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+    display: flex;
+    flex-direction: column;
 }
+
 
 .panel-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 22px;
 }
 
 .panel-header h3,
@@ -167,23 +144,23 @@ body {
 .panel-header a {
     text-decoration: none;
     color: #2563eb;
-    font-weight: 600;
     font-size: 14px;
+    font-weight: 600;
 }
 
-/* ===========================
-      Budget
-=========================== */
+/* ==========================
+   BUDGET
+========================== */
 
 .budget-item {
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
 .budget-title {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 12px;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .budget-title div {
@@ -199,8 +176,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    font-size: 18px;
+    color: #fff;
 }
 
 .food {
@@ -232,15 +208,15 @@ body {
     background: linear-gradient(90deg, #2563eb, #60a5fa);
 }
 
-/* ===========================
-      Transactions
-=========================== */
+/* ==========================
+   TRANSACTIONS
+========================== */
 
 .transaction {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: 16px 0;
     border-bottom: 1px solid #edf2f7;
 }
 
@@ -251,7 +227,7 @@ body {
 .left {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 14px;
 }
 
 .circle {
@@ -259,11 +235,11 @@ body {
     height: 48px;
     border-radius: 50%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-weight: 700;
+    justify-content: center;
+    color: #fff;
     font-size: 18px;
-    color: white;
+    font-weight: 700;
 }
 
 .swiggy {
@@ -279,78 +255,66 @@ body {
 }
 
 .transaction h4 {
-    font-size: 16px;
+    font-size: 15px;
     margin-bottom: 4px;
 }
 
 .transaction small {
     color: #6b7280;
+    font-size: 13px;
 }
 
-/* ===========================
-      Quick Actions
-=========================== */
+/* ==========================
+   QUICK ACTIONS
+========================== */
 
 .quick-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
     margin-top: 20px;
 }
 
 .quick-grid button {
-    padding: 16px;
-    border: none;
-    border-radius: 14px;
+    height: 110px;
     background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 10px;
+    align-items: center;
+    gap: 12px;
     font-size: 15px;
     font-weight: 600;
-    transition: .3s;
     color: #374151;
-    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
 }
 
 .quick-grid button svg {
-    font-size: 22px;
+    font-size: 24px;
     color: #2563eb;
 }
 
 .quick-grid button:hover {
     background: #2563eb;
-    color: white;
+    color: #fff;
     transform: translateY(-4px);
-    box-shadow: 0 12px 25px rgba(37, 99, 235, .25);
+    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.25);
 }
 
 .quick-grid button:hover svg {
-    color: white;
+    color: #fff;
 }
 
 .full-btn {
     grid-column: span 2;
 }
 
-@media (max-width: 992px) {
-    .quick-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 576px) {
-    .quick-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* ===========================
-      Scrollbar
-=========================== */
+/* ==========================
+   SCROLLBAR
+========================== */
 
 ::-webkit-scrollbar {
     width: 8px;
@@ -363,4 +327,40 @@ body {
 
 ::-webkit-scrollbar-track {
     background: #f1f5f9;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 1200px) {
+    .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard {
+        padding: 20px;
+    }
+
+    .top-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-btn {
+        grid-column: span 1;
+    }
+
+    .card-content h2 {
+        font-size: 24px;
+    }
 }

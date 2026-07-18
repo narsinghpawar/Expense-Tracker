@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Expense.css";
-import { addExpense } from "../../features/expense/expenseThunk";
+//import { addExpense } from "../../features/expense/expenseThunk";
 import expenseValidation from "../../validation/expenseValidationRule";
 import { validateField, validateForm } from "../../utils/validator";
+import { addExpense, updateExpense } from "../../features/expense/expenseThunk";
+import { clearSelectedExpense } from "../../features/expense/expenseSlice";
 
 const initialState = {
   title: "",
@@ -20,9 +22,21 @@ const initialState = {
 function AddExpense() {
   const dispatch = useDispatch();
   //the key what we add in expenseSlice file same key we need add at state.expense
-  const { loading, error } = useSelector((state) => state.expense);
+  //const { loading, error } = useSelector((state) => state.expense);
+  const { loading, error, selectedExpense } = useSelector(
+    (state) => state.expense,
+  );
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
+  useEffect(() => {
+    if (selectedExpense) {
+      setFormData({
+        ...selectedExpense,
+      });
+    } else {
+      setFormData(initialState);
+    }
+  }, [selectedExpense]);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -49,32 +63,45 @@ function AddExpense() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const validationErrors = validateForm(formData, expenseValidation);
+
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
+
     try {
-      await dispatch(addExpense(formData)).unwrap();
-      alert("Expense Added Successfully");
+      if (selectedExpense) {
+        await dispatch(updateExpense(formData)).unwrap();
+        alert("Expense Updated Successfully");
+      } else {
+        await dispatch(addExpense(formData)).unwrap();
+        alert("Expense Added Successfully");
+      }
+      dispatch(clearSelectedExpense());
       setFormData(initialState);
       setErrors({});
     } catch (err) {
       console.error(err);
     }
   };
-
   const handleReset = () => {
     setFormData(initialState);
     setErrors({});
+    dispatch(clearSelectedExpense());
   };
 
   return (
     <div className="expense-container">
       <div className="expense-card">
         <div className="expense-header">
-          <h2>Add Expense</h2>
-          <p>Track your daily expenses efficiently.</p>
+          <h2>{selectedExpense ? "Update Expense" : "Add Expense"}</h2>
+          <p>
+            {selectedExpense
+              ? "Update your expense details."
+              : "Track your daily expenses efficiently."}
+          </p>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -233,7 +260,13 @@ function AddExpense() {
 
           <div className="button-group">
             <button type="submit" className="save-btn" disabled={loading}>
-              {loading ? "Saving..." : "Save Expense"}
+              {loading
+                ? selectedExpense
+                  ? "Updating..."
+                  : "Saving..."
+                : selectedExpense
+                  ? "Update Expense"
+                  : "Save Expense"}
             </button>
 
             <button type="button" className="reset-btn" onClick={handleReset}>

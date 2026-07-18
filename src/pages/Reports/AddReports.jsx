@@ -90,7 +90,7 @@ function Reports() {
             </div>
           </div>
 
-          <div className="form-group">
+          {/* <div className="form-group">
             <label>Category</label>
 
             <select>
@@ -100,7 +100,7 @@ function Reports() {
               <option>Shopping</option>
               <option>Bills</option>
             </select>
-          </div>
+          </div> */}
 
           <div className="form-group search-btn-area">
             <button className="generate-btn">Generate Report</button>

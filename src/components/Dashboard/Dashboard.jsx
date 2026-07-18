@@ -1,5 +1,4 @@
 import "./Dashboard.css";
-
 import {
   FaMoneyBillWave,
   FaArrowDown,
@@ -17,33 +16,34 @@ import {
 import { useNavigate } from "react-router-dom";
 import { MdSavings } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { clearSelectedExpense } from "../../features/expense/expenseSlice";
+import { useDispatch } from "react-redux";
 
 function Dashboard() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const handleAddExpense = () => {
+    dispatch(clearSelectedExpense());
+    navigate("/expense/add");
+  };
   return (
     <div className="dashboard">
-      {/* ===================== Top Cards ===================== */}
-
       <div className="top-cards">
         <div className="card">
           <div className="card-icon income-icon">
             <FaMoneyBillWave />
           </div>
-
           <div className="card-content">
             <p>Total Income</p>
             <h2>₹58,450</h2>
             <span className="green">↑ 12.5% from last month</span>
           </div>
-
           <BsThreeDotsVertical className="menu" />
         </div>
-
         <div className="card">
           <div className="card-icon expense-icon">
             <FaArrowDown />
           </div>
-
           <div className="card-content">
             <p>Total Expense</p>
             <h2>₹28,735</h2>
@@ -71,84 +71,6 @@ function Dashboard() {
       {/* ================= Bottom ================= */}
 
       <div className="bottom-grid">
-        {/* Budget */}
-
-        <div className="panel">
-          <div className="panel-header">
-            <h3>Budget Summary</h3>
-            <a href="/">View All</a>
-          </div>
-
-          <div className="budget-item">
-            <div className="budget-title">
-              <div className="budget-icon food">
-                <FaUtensils />
-              </div>
-              <span>Groceries</span>
-            </div>
-
-            <div className="progress">
-              <div style={{ width: "76%" }}></div>
-            </div>
-          </div>
-          <div className="budget-item">
-            <div className="budget-title">
-              <div className="budget-icon food">
-                <FaUtensils />
-              </div>
-              <span>Food & Dining</span>
-            </div>
-
-            <div className="progress">
-              <div style={{ width: "76%" }}></div>
-            </div>
-          </div>
-
-          <div className="budget-item">
-            <div className="budget-title">
-              <div className="budget-icon transport">
-                <FaCar />
-              </div>
-
-              <span>Transport</span>
-            </div>
-
-            <div className="progress">
-              <div style={{ width: "81%" }}></div>
-            </div>
-          </div>
-
-          <div className="budget-item">
-            <div className="budget-title">
-              <div className="budget-icon shopping">
-                <FaShoppingBag />
-              </div>
-
-              <span>Shopping</span>
-            </div>
-
-            <div className="progress">
-              <div style={{ width: "62%" }}></div>
-            </div>
-          </div>
-
-          <div className="budget-item">
-            <div className="budget-title">
-              <div className="budget-icon bills">
-                <FaFileInvoiceDollar />
-              </div>
-
-              <span>Bills & Utilities</span>
-            </div>
-
-            <div className="progress">
-              <div style={{ width: "79%" }}></div>
-            </div>
-          </div>
-        </div>
-
-        {/* Recent Transactions */}
-
         <div className="panel">
           <div className="panel-header">
             <h3>Recent Transactions</h3>
@@ -203,9 +125,9 @@ function Dashboard() {
           <h3>Quick Actions</h3>
 
           <div className="quick-grid">
-            <button onClick={() => navigate("/expense/add")}>
+            <button onClick={handleAddExpense}>
               <FaPlusCircle />
-              Add Transaction
+              Add Expense
             </button>
 
             <button onClick={() => navigate("/income/add")}>
@@ -225,14 +147,6 @@ function Dashboard() {
               <FaCalendarAlt />
               View Transaction
             </button>
-
-            {/* <button
-              className="full-btn"
-              onClick={() => navigate("billReminder")}
-            >
-              <FaCalendarAlt />
-              Bills Reminder
-            </button> */}
           </div>
         </div>
       </div>
