@@ -8,8 +8,18 @@ import {
   FaExchangeAlt,
 } from "react-icons/fa";
 import "./GetAllTransaction.css";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllTransactions } from "../../features/transaction/transactionThunk";
 
 function GetAllTransaction() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllTransactions());
+  }, [dispatch]);
+  // const { transactions, loading, error } = useSelector(
+  //   (state) => state.transaction,
+  // );
   const transactions = [
     {
       id: 1,
@@ -105,9 +115,7 @@ function GetAllTransaction() {
             {transactions.map((item) => (
               <tr key={item.id}>
                 <td>{item.date}</td>
-
                 <td>{item.title}</td>
-
                 <td>{item.category}</td>
 
                 <td>
@@ -121,11 +129,8 @@ function GetAllTransaction() {
                     {item.type}
                   </span>
                 </td>
-
                 <td>{item.payment}</td>
-
                 <td>{item.amount}</td>
-
                 <td>
                   <span
                     className={
