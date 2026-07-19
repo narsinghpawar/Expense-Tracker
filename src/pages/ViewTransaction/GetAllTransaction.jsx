@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllTransactions } from "../../features/Transaction/transactionThunk";
-import { setSelectedTransaction } from "../../features/Transaction/transactionSlice";
 import { setSelectedExpense } from "../../features/expense/expenseSlice";
 
 function GetAllTransaction() {
