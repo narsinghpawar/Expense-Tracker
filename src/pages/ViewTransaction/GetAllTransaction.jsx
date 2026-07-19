@@ -1,10 +1,10 @@
 import { FaSearch, FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 import "./GetAllTransaction.css";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getAllTransactions } from "../../features/transaction/transactionThunk";
-import { setSelectedTransaction } from "../../features/transaction/transactionSlice";
+import { getAllTransactions } from "../../features/Transaction/transactionThunk";
+import { setSelectedTransaction } from "../../features/Transaction/transactionSlice";
 import { setSelectedExpense } from "../../features/expense/expenseSlice";
 
 function GetAllTransaction() {
@@ -14,6 +14,10 @@ function GetAllTransaction() {
   useEffect(() => {
     dispatch(getAllTransactions());
   }, [dispatch]);
+
+  const { transactions, loading, error } = useSelector(
+    (state) => state.transaction,
+  );
 
   const handleEdit = (item) => {
     dispatch(
@@ -33,39 +37,6 @@ function GetAllTransaction() {
 
     navigate("/expense/add");
   };
-
-  const transactions = [
-    {
-      id: 1,
-      date: "16-Jul-2026",
-      title: "Salary",
-      category: "Salary",
-      type: "Income",
-      payment: "Bank",
-      amount: "75000",
-      status: "Completed",
-    },
-    {
-      id: 2,
-      date: "15-Jul-2026",
-      title: "Groceries",
-      category: "Food",
-      type: "Expense",
-      payment: "UPI",
-      amount: "2500",
-      status: "Completed",
-    },
-    {
-      id: 3,
-      date: "14-Jul-2026",
-      title: "House Rent",
-      category: "Rent",
-      type: "Expense",
-      payment: "Bank",
-      amount: "15000",
-      status: "Pending",
-    },
-  ];
 
   return (
     <div className="transaction-container">
@@ -106,51 +77,64 @@ function GetAllTransaction() {
           </thead>
 
           <tbody>
-            {transactions.map((item) => (
-              <tr key={item.id}>
-                <td>{item.date}</td>
-                <td>{item.title}</td>
-                <td>{item.category}</td>
-
-                <td>
-                  <span
-                    className={
-                      item.type === "Income"
-                        ? "type income-badge"
-                        : "type expense-badge"
-                    }
-                  >
-                    {item.type}
-                  </span>
-                </td>
-
-                <td>{item.payment}</td>
-
-                <td>₹{item.amount}</td>
-
-                <td>
-                  <span
-                    className={
-                      item.status === "Completed"
-                        ? "status completed"
-                        : "status pending"
-                    }
-                  >
-                    {item.status}
-                  </span>
-                </td>
-
-                <td>
-                  <button className="edit-btn" onClick={() => handleEdit(item)}>
-                    <FaEdit />
-                  </button>
-
-                  <button className="delete-btn">
-                    <FaTrash />
-                  </button>
-                </td>
+            {loading ? (
+              <tr>
+                <td colSpan="8">Loading...</td>
               </tr>
-            ))}
+            ) : error ? (
+              <tr>
+                <td colSpan="8">{error}</td>
+              </tr>
+            ) : transactions.length === 0 ? (
+              <tr>
+                <td colSpan="8">No Transactions Found</td>
+              </tr>
+            ) : (
+              transactions.map((item) => (
+                <tr key={item._id}>
+                  <td>
+                    {new Date(item.expenseDate).toLocaleDateString("en-IN")}
+                  </td>
+
+                  <td>{item.title}</td>
+
+                  <td>{item.category}</td>
+
+                  <td>
+                    <span className="type expense-badge">Expense</span>
+                  </td>
+
+                  <td>{item.paymentMethod}</td>
+
+                  <td>₹{item.amount}</td>
+
+                  <td>
+                    <span
+                      className={
+                        item.status === "Paid"
+                          ? "status completed"
+                          : "status pending"
+                      }
+                    >
+                      {item.status}
+                    </span>
+                  </td>
+
+                  <td>
+                    <button
+                      className="edit-btn"
+                      onClick={() => handleEdit(item)}
+                    >
+                      <FaEdit />
+                    </button>
+
+                    <button className="delete-btn">
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

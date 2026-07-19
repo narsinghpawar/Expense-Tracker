@@ -4,9 +4,10 @@ const api = axios.create({
   baseURL: "http://localhost:5000/api",
 });
 
-export default api;
+export const getReportService = async (params) => {
+  const response = await api.get("/report/dashboard", {
+    params,
+  });
 
-export const getAllTransactionService = async () => {
-  const response = await api.get("/expense/getAll");
   return response.data;
 };

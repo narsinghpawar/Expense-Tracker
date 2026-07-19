@@ -3,56 +3,95 @@ import {
   FaMoneyBillWave,
   FaArrowDown,
   FaWallet,
-  FaUtensils,
-  FaCar,
-  FaShoppingBag,
-  FaFileInvoiceDollar,
   FaPlusCircle,
   FaChartBar,
-  FaBullseye,
   FaCalendarAlt,
   FaUniversity,
 } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { MdSavings } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { clearSelectedExpense } from "../../features/expense/expenseSlice";
-import { useDispatch } from "react-redux";
+import { getDashboardSummary } from "../../features/dashboard/dashboardThunk";
 
 function Dashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Dashboard state from Redux
+  const { summary, loading, error } = useSelector((state) => state.dashboard);
+
+  // Load dashboard summary when page opens
+  useEffect(() => {
+    dispatch(getDashboardSummary());
+  }, [dispatch]);
+
   const handleAddExpense = () => {
     dispatch(clearSelectedExpense());
     navigate("/expense/add");
   };
+
   return (
     <div className="dashboard">
+      {/* Show error if API fails */}
+      {error && (
+        <div
+          style={{
+            color: "red",
+            marginBottom: "15px",
+            fontWeight: "bold",
+          }}
+        >
+          {typeof error === "string" ? error : "Unable to load dashboard data"}
+        </div>
+      )}
+
       <div className="top-cards">
+        {/* Total Income */}
         <div className="card">
           <div className="card-icon income-icon">
             <FaMoneyBillWave />
           </div>
+
           <div className="card-content">
             <p>Total Income</p>
-            <h2>₹58,450</h2>
-            <span className="green">↑ 12.5% from last month</span>
+
+            <h2>
+              {loading
+                ? "Loading..."
+                : `₹${summary?.totalIncome?.toLocaleString() || 0}`}
+            </h2>
+
+            <span className="green">Updated from database</span>
           </div>
+
           <BsThreeDotsVertical className="menu" />
         </div>
+
+        {/* Total Expense */}
         <div className="card">
           <div className="card-icon expense-icon">
             <FaArrowDown />
           </div>
+
           <div className="card-content">
             <p>Total Expense</p>
-            <h2>₹28,735</h2>
-            <span className="red">↑ 8.3% from last month</span>
+
+            <h2>
+              {loading
+                ? "Loading..."
+                : `₹${summary?.totalExpense?.toLocaleString() || 0}`}
+            </h2>
+
+            <span className="red">Updated from database</span>
           </div>
 
           <BsThreeDotsVertical className="menu" />
         </div>
 
+        {/* Balance */}
         <div className="card">
           <div className="card-icon balance-icon">
             <FaWallet />
@@ -60,7 +99,13 @@ function Dashboard() {
 
           <div className="card-content">
             <p>Balance</p>
-            <h2>₹1,25,430</h2>
+
+            <h2>
+              {loading
+                ? "Loading..."
+                : `₹${summary?.balance?.toLocaleString() || 0}`}
+            </h2>
+
             <span>Updated Now</span>
           </div>
 
@@ -74,9 +119,21 @@ function Dashboard() {
         <div className="panel">
           <div className="panel-header">
             <h3>Recent Transactions</h3>
-            <a href="/">View All</a>
+
+            <button
+              style={{
+                border: "none",
+                background: "none",
+                color: "#3b82f6",
+                cursor: "pointer",
+              }}
+              onClick={() => navigate("/getAllTransaction")}
+            >
+              View All
+            </button>
           </div>
 
+          {/* Dummy Data */}
           <div className="transaction">
             <div className="left">
               <div className="circle swiggy">S</div>

@@ -2,12 +2,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getAllTransactionService } from "./TransactionService";
 
 export const getAllTransactions = createAsyncThunk(
-  "transaction/getAllTransactions",
-  async (_, thunkAPI) => {
+  "expense/getAll",
+  async (_, { rejectWithValue }) => {
     try {
-      return await getAllTransactionService();
+      const response = await getAllTransactionService();
+
+      return response.data; // ✅ returns the array
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+      return rejectWithValue(error.response?.data || error.message);
     }
   },
 );
