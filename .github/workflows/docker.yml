@@ -10,7 +10,7 @@ on:
       - master
 
 jobs:
-  frontend:
+  validate-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,20 +32,46 @@ jobs:
       - name: Run Tests
         run: npm test --if-present
 
+  build-and-deploy:
+    needs: validate-and-test
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
       - name: Build React App
         run: npm run build
 
       - name: Login to Docker Hub
-        if: github.event_name == 'push'
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and Push Docker Image
-        if: github.event_name == 'push'
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
           tags: pawar41/expense-tracker:latest
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy to S3
+        run: aws s3 sync dist/ s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete

@@ -62,14 +62,17 @@ function Reports() {
       body: [
         ["Total Income", `₹${reportData.summary.totalIncome}`],
         ["Total Expense", `₹${reportData.summary.totalExpense}`],
-        ["Balance", `₹${reportData.summary.balance}`],
+        ["Balance", `RS. ${reportData.summary.balance}`],
       ],
     });
 
     autoTable(doc, {
       startY: doc.lastAutoTable.finalY + 10,
       head: [["Category", "Amount"]],
-      body: reportData.categories.map((item) => [item._id, `₹${item.amount}`]),
+      body: reportData.categories.map((item) => [
+        item._id,
+        `RS. ${item.amount}`,
+      ]),
     });
 
     autoTable(doc, {

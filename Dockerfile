@@ -1,17 +1,28 @@
-From node:26.5.0-alpine3.24 As build    
-
-USER root
+# Stage 1: Build the React application
+FROM node:22-alpine AS build
 
 WORKDIR /app
 
-COPY . .
+# Copy package files
+COPY package*.json ./
 
+# Install dependencies
 RUN npm install
 
+# Copy the application source
+COPY . .
+
+# Build the production bundle
 RUN npm run build
 
-FROM nginx:1.31.3-alpine AS Expense-Tracker
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
 
+# Copy the build output
 COPY --from=build /app/dist /usr/share/nginx/html
 
-CMD [ "nginx","-g","daemon off;" ]
+# Expose Nginx port
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
